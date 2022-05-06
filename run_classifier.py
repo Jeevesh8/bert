@@ -313,7 +313,7 @@ class QQPProcessor(DataProcessor):
 
   def get_labels(self):
     """See base class."""
-    return ["not_duplicate", "duplicate"]
+    return ["0", "1"]
 
   def _create_examples(self, lines, set_type):
     """Creates examples for the training and dev sets."""
@@ -322,10 +322,10 @@ class QQPProcessor(DataProcessor):
       if i == 0:
         continue
       guid = "%s-%s" % (set_type, tokenization.convert_to_unicode(line[0]))
-      text_a = tokenization.convert_to_unicode(line[8])
-      text_b = tokenization.convert_to_unicode(line[9])
+      text_a = tokenization.convert_to_unicode(line[3])
+      text_b = tokenization.convert_to_unicode(line[4])
       if set_type == "test":
-        label = "contradiction"
+        raise ValueError("No labels available for test set.")
       else:
         label = tokenization.convert_to_unicode(line[-1])
       examples.append(
