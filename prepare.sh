@@ -6,6 +6,7 @@ SINGULARITY_IMAGE=/scratch/work/public/singularity/cuda11.1.1-cudnn8-devel-ubunt
 OVERLAY_FILE=/scratch/$1/mode-conn-$2/mode-conn-$2.ext3
 
 singularity exec --nv --overlay $OVERLAY_FILE $SINGULARITY_IMAGE /bin/bash -c "
+source /ext3/env.sh
 pip install getgist
 getgist raffaem download_glue_data.py
 source /ext3/env.sh
