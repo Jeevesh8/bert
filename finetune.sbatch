@@ -4,7 +4,7 @@
 #SBATCH --output=./sbatch_outs/%A_%a.out
 #SBATCH --error=./sbatch_outs/%A_%a.err
 #SBATCH --nodes=1 --ntasks-per-node=1
-#SBATCH --mem=128G
+#SBATCH --mem=64G
 #SBATCH --gres=gpu:1
 #SBATCH --time=17:59:59
 #nvidia-smi
