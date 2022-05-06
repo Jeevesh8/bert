@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=finetune_berts
 #SBATCH --open-mode=append
-#SBATCH --output=./sbatch_outs/%j_%x.out
-#SBATCH --error=./sbatch_outs/%j_%x.err
+#SBATCH --output=./sbatch_outs/%A_%a.out
+#SBATCH --error=./sbatch_outs/%A_%a.err
 #SBATCH --nodes=1
 #SBATCH --mem=128G
 #SBATCH --gres=gpu:1
