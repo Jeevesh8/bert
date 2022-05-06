@@ -10,6 +10,6 @@ source /ext3/env.sh
 pip install getgist
 getgist raffaem download_glue_data.py
 source /ext3/env.sh
-pip install -Iv tensorflow==1.11.0
+pip install -Iv tensorflow-gpu==1.15
 python3 download_glue_data.py --data_dir glue_data --tasks QQP
 "
