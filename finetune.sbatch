@@ -19,16 +19,14 @@ source /ext3/env.sh
 export HF_DATASETS_CACHE=\"/scratch/$USER/.cache/huggingface/datasets\"
 export TRANSFORMERS_CACHE=\"/scratch/$USER/.cache/huggingface/transformers\"
 export HF_METRICS_CACHE=\"/scratch/$USER/.cache/huggingface/metrics\"
-export BERT_BASE_DIR=./uncased_L-12_H-768_A-12
-export GLUE_DIR=./glue_data
 python3 run_classifier.py \
   --task_name=qqp \
   --do_train=true \
   --do_eval=true \
-  --data_dir=$GLUE_DIR/QQP \
-  --vocab_file=$BERT_BASE_DIR/vocab.txt \
-  --bert_config_file=$BERT_BASE_DIR/bert_config.json \
-  --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
+  --data_dir=./glue_data/QQP \
+  --vocab_file=./uncased_L-12_H-768_A-12/vocab.txt \
+  --bert_config_file=./uncased_L-12_H-768_A-12/bert_config.json \
+  --init_checkpoint=./uncased_L-12_H-768_A-12/bert_model.ckpt \
   --max_seq_length=128 \
   --train_batch_size=32 \
   --learning_rate=2e-5 \
