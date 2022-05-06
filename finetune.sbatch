@@ -12,6 +12,9 @@
 SINGULARITY_IMAGE=/scratch/work/public/singularity/cuda11.1.1-cudnn8-devel-ubuntu20.04.sif
 OVERLAY_FILE=/scratch/$USER/mode-conn-0/mode-conn-0.ext3:ro
 
+BERT_BASE_DIR=./uncased_L-12_H-768_A-12
+GLUE_DIR=./glue_data
+
 singularity exec --nv\
                  --overlay $OVERLAY_FILE $SINGULARITY_IMAGE \
                  /bin/bash -c "
@@ -23,10 +26,10 @@ python3 run_classifier.py \
   --task_name=qqp \
   --do_train=true \
   --do_eval=true \
-  --data_dir=./glue_data/QQP \
-  --vocab_file=./uncased_L-12_H-768_A-12/vocab.txt \
-  --bert_config_file=./uncased_L-12_H-768_A-12/bert_config.json \
-  --init_checkpoint=./uncased_L-12_H-768_A-12/bert_model.ckpt \
+  --data_dir=$GLUE_DIR/QQP \
+  --vocab_file=$BERT_BASE_DIR/vocab.txt \
+  --bert_config_file=$BERT_BASE_DIR/bert_config.json \
+  --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
   --max_seq_length=128 \
   --train_batch_size=32 \
   --learning_rate=2e-5 \
