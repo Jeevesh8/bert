@@ -95,14 +95,14 @@ if __name__=="__main__":
     
     model_save_dir = f"qqp_save_{model_num}"
     hf_repo_dir = f"bert_ft_qqp-{model_num}"
-    
+
     for steps in [15000, 20000, 25000, 30000, 34110]:    
         ckpt = f"{model_save_dir}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
         
         assert not os.path.isdir(hf_repo_dir)
         
-        bert.push_to_hub(f"Jeevesh8/bert_ft_qqp-{model_num}", 
+        bert.push_to_hub(f"bert_ft_qqp-{model_num}", 
                          commit_message=f"Saving weights and logs of step {steps}",
                          use_auth_token=hf_auth_token)
     
