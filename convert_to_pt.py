@@ -1,7 +1,9 @@
 import os, sys
+import shutil
 import torch
 
 from transformers import BertForSequenceClassification, BertConfig, BertTokenizer
+from huggingface_hub import Repository
 
 # Function from: https://github.com/huggingface/transformers/blob/215e0681e4c3f6ade6e219d022a5e640b42fcb76/src/transformers/models/bert/modeling_bert.py#L109
 def load_tf_weights_in_bert(model, config, tf_checkpoint_path):
@@ -90,10 +92,25 @@ if __name__=="__main__":
     tokenizer.push_to_hub(f"Jeevesh/bert_ft_qqp-{model_num}", 
                           commit_message="Saving tokenizer",
                           use_auth_token=hf_auth_token)
-
-    for steps in [15000, 20000, 25000, 30000, 34110]:
-        ckpt = f"qqp_save_{model_num}/model.ckpt-{steps}"
+    
+    model_save_dir = f"qqp_save_{model_num}"
+    hf_repo_dir = f"bert_ft_qqp-{model_num}"
+    
+    for steps in [15000, 20000, 25000, 30000, 34110]:    
+        ckpt = f"{model_save_dir}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
+        
+        assert not os.path.isdir(hf_repo_dir)
+        
         bert.push_to_hub(f"Jeevesh8/bert_ft_qqp-{model_num}", 
                          commit_message=f"Saving weights and logs of step {steps}",
                          use_auth_token=hf_auth_token)
+    
+    
+    repo = Repository(local_dir=hf_repo_dir, use_auth_token=hf_auth_token)
+    
+    for file in os.listdir(model_save_dir):
+        filepath = os.path.join(model_save_dir, file)
+        if os.path.isfile(filepath) and "events.out.tfevents" in filepath:
+            shutil.copy(filepath, hf_repo_dir)
+    repo.push_to_hub(commit_message="Added training logs")
