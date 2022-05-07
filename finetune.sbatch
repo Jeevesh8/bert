@@ -6,7 +6,7 @@
 #SBATCH --nodes=1 --ntasks-per-node=1
 #SBATCH --mem=64G
 #SBATCH --gres=gpu:1
-#SBATCH --time=17:59:59
+#SBATCH --time=22:59:59
 #nvidia-smi
 
 SINGULARITY_IMAGE=/scratch/work/public/singularity/cuda11.1.1-cudnn8-devel-ubuntu20.04.sif
