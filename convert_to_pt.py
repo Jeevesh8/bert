@@ -46,6 +46,9 @@ def load_tf_weights_in_bert(model, config, tf_checkpoint_path):
                 scope_names = re.split(r"_(\d+)", m_name)
             else:
                 scope_names = [m_name]
+            if (scope_names[0]=="output_weights" or scope_names[0]=="output_bias" 
+                and hasattr(pointer, "classifier")):
+                pointer = getattr(pointer, "classifier")
             if scope_names[0] == "kernel" or scope_names[0] == "gamma":
                 pointer = getattr(pointer, "weight")
             elif scope_names[0] == "output_bias" or scope_names[0] == "beta":
