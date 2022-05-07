@@ -83,7 +83,7 @@ def load_tf_weights_in_bert(model, config, tf_checkpoint_path):
 if __name__=="__main__":
     model_num, hf_auth_token = sys.argv[1], sys.argv[2]
 
-    config = BertConfig.from_json_file("../uncased_L-12_H-768_A-12/bert_config.json")
+    config = BertConfig.from_json_file("./uncased_L-12_H-768_A-12/bert_config.json")
     bert = BertForSequenceClassification(config=config)
     
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
