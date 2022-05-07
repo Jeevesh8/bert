@@ -90,7 +90,7 @@ if __name__=="__main__":
     tokenizer.push_to_hub(f"Jeevesh/bert_ft_qqp-{model_num}", commit="Saving tokenizer")
 
     for steps in [15000, 20000, 25000, 30000, 34110]:
-        ckpt = f"model.ckpt-{steps}"
+        ckpt = f"qqp_save_{model_num}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
         bert.push_to_hub(f"Jeevesh8/bert_ft_qqp-{model_num}", 
                          commit_message=f"Saving weights and logs of step {steps}")
