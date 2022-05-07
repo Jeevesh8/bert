@@ -93,4 +93,5 @@ if __name__=="__main__":
         ckpt = f"qqp_save_{model_num}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
         bert.push_to_hub(f"Jeevesh8/bert_ft_qqp-{model_num}", 
-                         commit_message=f"Saving weights and logs of step {steps}")
+                         commit_message=f"Saving weights and logs of step {steps}",
+                         use_auth_token=hf_auth_token)
