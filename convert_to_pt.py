@@ -87,7 +87,9 @@ if __name__=="__main__":
     bert = BertForSequenceClassification(config=config)
     
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-    tokenizer.push_to_hub(f"Jeevesh/bert_ft_qqp-{model_num}", commit="Saving tokenizer")
+    tokenizer.push_to_hub(f"Jeevesh/bert_ft_qqp-{model_num}", 
+                          commit_message="Saving tokenizer",
+                          use_auth_token=hf_auth_token)
 
     for steps in [15000, 20000, 25000, 30000, 34110]:
         ckpt = f"qqp_save_{model_num}/model.ckpt-{steps}"
