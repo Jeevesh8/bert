@@ -12,6 +12,6 @@ getgist raffaem download_glue_data.py
 conda install python=3.7
 conda install tensorflow-gpu==1.15.0
 pip install numpy==1.19.5
-python3 download_glue_data.py --data_dir glue_data --tasks QQP
+python3 download_glue_data.py --data_dir glue_data --tasks CoLA
 python3 -c \"import tensorflow as tf; print(tf.__version__);\"
 "

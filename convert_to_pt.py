@@ -90,14 +90,14 @@ if __name__=="__main__":
     
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
     
-    hf_repo_dir = f"bert_ft_qqp-{model_num}"
+    hf_repo_dir = f"bert_ft_cola-{model_num}"
     assert not os.path.isdir(hf_repo_dir)
 
     tokenizer.push_to_hub(hf_repo_dir, 
                           commit_message="Saving tokenizer",
                           use_auth_token=hf_auth_token)
     
-    model_save_dir = f"qqp_save_{model_num}"
+    model_save_dir = f"cola_save_{model_num}"
     
     for steps in [15000, 20000, 25000, 30000, 34110]:    
         ckpt = f"{model_save_dir}/model.ckpt-{steps}"

@@ -23,10 +23,10 @@ export HF_DATASETS_CACHE=\"/scratch/$USER/.cache/huggingface/datasets\"
 export TRANSFORMERS_CACHE=\"/scratch/$USER/.cache/huggingface/transformers\"
 export HF_METRICS_CACHE=\"/scratch/$USER/.cache/huggingface/metrics\"
 python3 run_classifier.py \
-  --task_name=qqp \
+  --task_name=cola \
   --do_train=true \
   --do_eval=true \
-  --data_dir=$GLUE_DIR/QQP \
+  --data_dir=$GLUE_DIR/CoLA \
   --vocab_file=$BERT_BASE_DIR/vocab.txt \
   --bert_config_file=$BERT_BASE_DIR/bert_config.json \
   --init_checkpoint=$BERT_BASE_DIR/bert_model.ckpt \
@@ -34,6 +34,6 @@ python3 run_classifier.py \
   --train_batch_size=32 \
   --learning_rate=2e-5 \
   --num_train_epochs=3.0 \
-  --output_dir=qqp_save_$SLURM_ARRAY_TASK_ID --save_checkpoints_steps=5000
+  --output_dir=cola_save_$SLURM_ARRAY_TASK_ID --save_checkpoints_steps=300
 exit
 "
