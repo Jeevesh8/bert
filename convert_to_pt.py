@@ -89,19 +89,21 @@ if __name__=="__main__":
     bert = BertForSequenceClassification(config=config)
     
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
-    tokenizer.push_to_hub(f"bert_ft_qqp-{model_num}", 
+    
+    hf_repo_dir = f"bert_ft_qqp-{model_num}"
+    assert not os.path.isdir(hf_repo_dir)
+
+    tokenizer.push_to_hub(hf_repo_dir, 
                           commit_message="Saving tokenizer",
                           use_auth_token=hf_auth_token)
     
     model_save_dir = f"qqp_save_{model_num}"
-    hf_repo_dir = f"bert_ft_qqp-{model_num}"
-    assert not os.path.isdir(hf_repo_dir)
-
+    
     for steps in [15000, 20000, 25000, 30000, 34110]:    
         ckpt = f"{model_save_dir}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
         
-        bert.push_to_hub(f"bert_ft_qqp-{model_num}", 
+        bert.push_to_hub(hf_repo_dir,
                          commit_message=f"Saving weights and logs of step {steps}",
                          use_auth_token=hf_auth_token)
     
