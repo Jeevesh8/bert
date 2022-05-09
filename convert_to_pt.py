@@ -99,7 +99,7 @@ if __name__=="__main__":
     
     model_save_dir = f"cola_save_{model_num}"
     
-    for steps in [15000, 20000, 25000, 30000, 34110]:    
+    for steps in [300, 600, 801]:
         ckpt = f"{model_save_dir}/model.ckpt-{steps}"
         bert = load_tf_weights_in_bert(bert, config, ckpt)
         
